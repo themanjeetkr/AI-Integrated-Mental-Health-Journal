@@ -1,0 +1,34 @@
+const express = require("express");
+const helmet = require("helmet");
+const cors = require("cors");
+require("dotenv").config();
+
+const connectDB = require("./config/db");
+const authRoutes = require("./routes/AuthRoutes");
+const journalRoutes = require("./routes/journalRoutes");
+
+const app = express();
+
+// Middlewares
+app.use(helmet());
+app.use(cors());
+app.use(express.json());
+
+// Database connection
+connectDB();
+
+const PORT = process.env.PORT || 5000;
+
+// Test route
+app.get("/api", (req, res) => {
+  res.send("api is running");
+});
+
+// Routes
+app.use("/api/auth", authRoutes);
+app.use("/api/journals", journalRoutes);
+
+// Start server
+app.listen(PORT, () => {
+  console.log(`server is running on port ${PORT}`);
+});
