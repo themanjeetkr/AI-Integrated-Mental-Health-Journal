@@ -1,11 +1,12 @@
 import { useState } from "react";
-import Login from "./pages/Login";
+import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 
 export default function App() {
+
   const [token, setToken] = useState(localStorage.getItem("token"));
 
-  if (!token) return <Login setToken={setToken} />;
+  if (!token) return <Auth setToken={setToken} />;
 
-  return <Dashboard token={token} setToken={setToken} />;
+  return <Dashboard token={token} />;
 }
