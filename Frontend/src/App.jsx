@@ -1,17 +1,11 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [token, setToken] = useState(localStorage.getItem("token"));
 
-  return (
-    <>
-     <h1 class="text-3xl font-bold underline">
-    Hello world!</h1>
-    </>
-  )
+  if (!token) return <Login setToken={setToken} />;
+
+  return <Dashboard token={token} setToken={setToken} />;
 }
-
-export default App
