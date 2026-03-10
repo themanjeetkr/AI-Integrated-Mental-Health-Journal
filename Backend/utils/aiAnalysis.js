@@ -5,6 +5,31 @@ const HF_TOKEN = process.env.HUGGINGFACE_API_TOKEN;
 const EMOTION_API =
 "https://router.huggingface.co/hf-inference/models/j-hartmann/emotion-english-distilroberta-base";
 
+function getRecommendation(emotion) {
+  switch (emotion) {
+    case "joy":
+      return ["Keep doing what makes you feel happy and productive."];
+
+    case "sadness":
+      return ["Consider talking to a friend or writing down what you're feeling."];
+
+    case "anger":
+      return ["Take a few deep breaths and step away for a moment."];
+
+    case "fear":
+      return ["Try a short breathing or grounding exercise."];
+
+    case "surprise":
+      return ["Reflect on what caused this feeling and what you learned."];
+
+    case "neutral":
+      return ["Take a moment to reflect on something positive today."];
+
+    default:
+      return ["Take a short mindful break."];
+  }
+}
+
 async function analyzeJournal(content) {
   try {
 
@@ -33,7 +58,7 @@ async function analyzeJournal(content) {
       primaryEmotion,
       secondaryEmotions,
       riskLevel: sentimentScore < 0 ? "medium":"low",
-      recommendations: ["Take a short mindful break."]
+      recommendations: getRecommendation(primaryEmotion)
     };
 
   } catch (err) {
