@@ -65,6 +65,7 @@ export default function Navbar({ title = "Dashboard" }) {
                 className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-rose-400 hover:bg-rose-600/10 transition-all text-left">
                 <LogOut size={14} /> Sign out
               </button>
+              
             </div>
           </div>
         )}
