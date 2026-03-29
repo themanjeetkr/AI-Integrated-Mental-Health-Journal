@@ -5,13 +5,12 @@ import {
   createJournal,
   updateJournal,
   deleteJournal,
-} from "../services/api";  // ← correct path
+} from "../services/api";  
 import toast from "react-hot-toast";
 
 const JournalContext = createContext(null);
 
-const getToken = () => localStorage.getItem("token");  // ← gets token automatically
-
+const getToken = () => localStorage.getItem("token");  
 export function JournalProvider({ children }) {
   const [journals, setJournals] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -20,7 +19,7 @@ export function JournalProvider({ children }) {
   const fetchJournals = useCallback(async () => {
     setLoading(true);
     try {
-      const data = await getJournals(getToken());        // ← no destructure, pass token
+      const data = await getJournals(getToken());        
       setJournals(Array.isArray(data) ? data : []);
     } catch (err) {
       toast.error("Failed to load journals");
@@ -32,7 +31,7 @@ export function JournalProvider({ children }) {
   const fetchJournalById = async (id) => {
     setLoading(true);
     try {
-      const data = await getJournalById(id, getToken()); // ← pass token
+      const data = await getJournalById(id, getToken()); 
       setCurrentJournal(data);
       return data;
     } catch {
