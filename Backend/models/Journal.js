@@ -7,19 +7,30 @@ const journalSchema = new mongoose.Schema(
       ref: "User",
       required: true
     },
+
     title: {
       type: String,
       required: true
     },
+
     content: {
       type: String,
       required: true
     },
+
+    // 🔥 ADD THIS (VERY IMPORTANT)
+    mood: {
+      type: String,
+      enum: ["happy", "excited", "calm", "neutral", "anxious", "sad", "angry"],
+      default: "neutral"
+    },
+
     moodScore: {
       type: Number,
       min: -5,
       max: 5
     },
+
     tags: [String],
 
     aiInsights: {
@@ -33,7 +44,6 @@ const journalSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Important index for performance
 journalSchema.index({ userId: 1, createdAt: -1 });
 
 module.exports = mongoose.model("Journal", journalSchema);

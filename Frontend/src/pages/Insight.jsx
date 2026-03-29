@@ -50,7 +50,7 @@ export default function Insights() {
   const { journals, fetchJournals } = useJournals();
   useEffect(() => {
     fetchJournals();
-  }, [fetchJournals]);
+  }, []);
 
   // Mood distribution for pie chart
   const moodDist = useMemo(() => {
