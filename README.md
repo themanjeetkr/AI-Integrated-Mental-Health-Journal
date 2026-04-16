@@ -1,95 +1,43 @@
 # MindScribe — AI Mental Health Journal
 
-A full-featured React frontend for the MindScribe journaling API.
+MindScribe is a full-stack mental wellness journaling application that uses 
+AI to analyze your emotional state from daily journal entries. It automatically 
+detects your primary emotion, generates personalized recommendations, and 
+visualizes your mood patterns over time through interactive charts.
 
-## 📁 Project Structure
+## 🧠 How It Works
+Write a journal entry → AI analyzes the content → Detects sentiment score, 
+primary emotion, secondary emotions, and risk level → Dashboard updates 
+with your latest mental health insights.
 
-```
-src/
-├── api/
-│   └── index.js              # Axios instance + all API calls
-├── context/
-│   ├── AuthContext.jsx        # Auth state, login/register/logout
-│   └── JournalContext.jsx     # Journal CRUD state
-├── components/
-│   ├── layout/
-│   │   ├── DashboardLayout.jsx
-│   │   ├── Sidebar.jsx
-│   │   └── Navbar.jsx
-│   └── ui/
-│       ├── StatCard.jsx
-│       ├── JournalCard.jsx
-│       ├── MoodBadge.jsx
-│       └── ProtectedRoute.jsx
-└── pages/
-    ├── Homepage.jsx           # Landing page
-    ├── Auth.jsx               # Login + Register
-    ├── Dashboard.jsx          # Main dashboard
-    ├── Journals.jsx           # Journal list
-    ├── JournalEditor.jsx      # Create / edit entry
-    ├── JournalDetail.jsx      # View single entry
-    ├── Insights.jsx           # AI insights + charts
-    └── Settings.jsx           # User settings
-```
+## 🛠️ Tech Stack
 
-## 📦 Install Dependencies
+**Frontend:** React 18, Tailwind CSS v4, Recharts, React Router v6,
+             React Hot Toast, Lucide React
 
-```bash
+**Backend:** Node.js, Express.js, MongoDB, Mongoose, JWT, bcrypt, dotenv
+
+**AI:** Sentiment analysis pipeline with emotion classification
+        (joy, sadness, anger, fear, surprise, disgust → normalized moods)
+
+## ✨ Key Features
+- 🔐 JWT authentication with protected routes
+- 📝 Full journal CRUD with mood tagging
+- 🤖 AI sentiment analysis on every entry
+- 📊 7-day mood trend and activity charts
+- 🎯 Emotional balance radar chart
+- 🥧 Mood distribution pie chart
+- 💡 Personalized AI recommendations
+- 🎨 Custom dark SaaS UI with glassmorphism
+
+## 🚀 Getting Started
+
+### Backend
+cd Backend
 npm install
-```
+node server.js
 
-### All packages used:
-
-| Package | Purpose |
-|---|---|
-| `react` `react-dom` | Core React |
-| `react-router-dom` | Client-side routing |
-| `axios` | HTTP requests to backend API |
-| `recharts` | Mood trend & activity charts |
-| `react-hot-toast` | Toast notifications |
-| `lucide-react` | Icon library |
-| `date-fns` | Date formatting |
-| `tailwindcss` | Utility-first CSS framework |
-| `autoprefixer` | CSS autoprefixer |
-| `postcss` | PostCSS (required by Tailwind) |
-
-## 🚀 Setup
-
-1. Copy `.env.example` to `.env`:
-   ```bash
-   cp .env.example .env
-   ```
-
-2. Update `REACT_APP_API_URL` to point to your Express backend:
-   ```
-   REACT_APP_API_URL=http://localhost:5000/api
-   ```
-
-3. Start the development server:
-   ```bash
-   npm start
-   ```
-
-## 🔗 API Endpoints Used
-
-| Method | Endpoint | Description |
-|---|---|---|
-| POST | `/auth/register` | Register new user |
-| POST | `/auth/login` | Login, returns JWT |
-| GET | `/journals` | Get all user journals |
-| POST | `/journals` | Create new journal |
-| GET | `/journals/:id` | Get single journal |
-| PUT | `/journals/:id` | Update journal |
-| DELETE | `/journals/:id` | Delete journal |
-
-## 🎨 Pages
-
-- **`/`** — Homepage (Hero, Features, How It Works, Testimonials, CTA, Footer)
-- **`/login`** — Sign in / Sign up
-- **`/dashboard`** — Stats, charts, recent entries, AI insights
-- **`/journals`** — Browse & filter all entries
-- **`/journals/new`** — Write a new entry
-- **`/journals/:id`** — Read a single entry
-- **`/journals/:id/edit`** — Edit an entry
-- **`/insights`** — Mood distribution, emotional balance radar
-- **`/settings`** — Profile, password, notification preferences
+### Frontend
+cd Frontend
+npm install
+npm run dev
