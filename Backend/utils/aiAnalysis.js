@@ -7,6 +7,7 @@ const EMOTION_API =
 
 function getRecommendation(emotion) {
   switch (emotion) {
+    
     case "joy":
       return ["Keep doing what makes you feel happy and productive."];
 
