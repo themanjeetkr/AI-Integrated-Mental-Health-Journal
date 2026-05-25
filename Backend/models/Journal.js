@@ -33,6 +33,8 @@ const journalSchema = new mongoose.Schema(
 
     tags: [String],
 
+    aiReply: String,
+
     aiInsights: {
       sentimentScore: Number,
       primaryEmotion: String,

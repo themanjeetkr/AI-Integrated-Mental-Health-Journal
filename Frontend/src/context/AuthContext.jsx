@@ -1,5 +1,10 @@
 import React, { createContext, useContext, useState } from "react";
-import { loginUser, registerUser } from "../services/api";
+import {
+  loginUser,
+  registerUser,
+  updatePasswordRequest,
+  updateProfileRequest,
+} from "../services/api";
 import toast from "react-hot-toast";
 
 const AuthContext = createContext(null);
@@ -60,8 +65,62 @@ export function AuthProvider({ children }) {
     toast.success("Logged out");
   };
 
+  const updateProfile = async (profileData) => {
+    setLoading(true);
+    try {
+      const token = localStorage.getItem("token");
+      const data = await updateProfileRequest(profileData, token);
+
+      if (!data.user) {
+        toast.error(data.message || "Failed to update profile");
+        return false;
+      }
+
+      localStorage.setItem("user", JSON.stringify(data.user));
+      setUser(data.user);
+      toast.success("Profile updated");
+      return true;
+    } catch (err) {
+      toast.error("Failed to update profile");
+      return false;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const updatePassword = async (passwordData) => {
+    setLoading(true);
+    try {
+      const token = localStorage.getItem("token");
+      const data = await updatePasswordRequest(passwordData, token);
+
+      if (data.message !== "Password updated") {
+        toast.error(data.message || "Failed to update password");
+        return false;
+      }
+
+      toast.success("Password updated");
+      return true;
+    } catch (err) {
+      toast.error("Failed to update password");
+      return false;
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        loading,
+        login,
+        register,
+        logout,
+        updateProfile,
+        updatePassword,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
