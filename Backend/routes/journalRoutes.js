@@ -5,13 +5,15 @@ const {
   getJournals,
   getJournalById,
   updateJournal,
-  deleteJournal
+  deleteJournal,
+  getJournalSuggestions
 } = require("../controllers/journalController");
 
 const router = express.Router();
 
 router.post("/", protect, createJournal);
 router.get("/", protect, getJournals);
+router.post("/suggest", protect, getJournalSuggestions);
 router.get("/:id", protect, getJournalById);
 router.put("/:id", protect, updateJournal);
 router.delete("/:id", protect, deleteJournal);

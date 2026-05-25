@@ -28,7 +28,7 @@ export function JournalProvider({ children }) {
     }
   }, []);
 
-  const fetchJournalById = async (id) => {
+  const fetchJournalById = useCallback(async (id) => {
     setLoading(true);
     try {
       const data = await getJournalById(id, getToken()); 
@@ -39,7 +39,7 @@ export function JournalProvider({ children }) {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   const addJournal = async (journalData) => {
     try {

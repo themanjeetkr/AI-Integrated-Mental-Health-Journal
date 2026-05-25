@@ -1,52 +1,34 @@
 const Journal = require("../models/Journal");
 const analyzeJournal = require("../utils/aiAnalysis");
-
-// 🔥 AI → Mood mapping
-const emotionMap = {
-  joy: "happy",
-  happiness: "happy",
-  excitement: "excited",
-  calmness: "calm",
-  anxiety: "anxious",
-  fear: "anxious",
-  sadness: "sad",
-  anger: "angry",
-  neutral: "neutral",
-};
+const {
+  buildJournalSuggestions,
+  resolveJournalMood,
+} = require("../utils/aiAnalysis");
 
 // ---------------- CREATE ----------------
 exports.createJournal = async (req, res) => {
   try {
-    const { title, content, mood, moodScore, tags } = req.body;
+    const { title, content, mood, moodScore, tags, aiReply } = req.body;
 
-    console.log("REQ BODY:", req.body); // 🔍 debug
-
-    // 🔥 Save initial journal (with mood)
     const journal = await Journal.create({
       userId: req.user._id,
       title,
       content,
-      mood, // ✅ FIXED
+      mood: mood || "neutral",
       moodScore,
       tags,
+      aiReply,
     });
 
-    // 🔥 Run AI in background
     analyzeJournal(content)
       .then(async (aiResult) => {
-        console.log("AI RESULT:", aiResult);
-
         if (!aiResult) return;
 
-        // 🔥 Map AI emotion → mood
-        const mappedMood =
-          emotionMap[aiResult.primaryEmotion?.toLowerCase()] ||
-          journal.mood ||
-          "neutral";
+        const mappedMood = resolveJournalMood(content, journal.mood, aiResult);
 
         await Journal.findByIdAndUpdate(journal._id, {
           aiInsights: aiResult,
-          mood: mappedMood, // 🔥 UPDATE MOOD FROM AI
+          mood: mappedMood,
         });
       })
       .catch((err) => console.error("AI async error:", err));
@@ -61,7 +43,7 @@ exports.createJournal = async (req, res) => {
 exports.getJournals = async (req, res) => {
   try {
     const page = Number(req.query.page) || 1;
-    const limit = 5;
+    const limit = Math.min(Number(req.query.limit) || 100, 200);
     const skip = (page - 1) * limit;
 
     const journals = await Journal.find({ userId: req.user._id })
@@ -125,6 +107,26 @@ exports.deleteJournal = async (req, res) => {
     }
 
     res.json({ message: "Journal deleted" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// ---------------- AI SUGGESTIONS ----------------
+exports.getJournalSuggestions = async (req, res) => {
+  try {
+    const { content, mood } = req.body;
+
+    if (!content || content.trim().length < 20) {
+      return res.status(400).json({
+        message: "Write at least 20 characters to get an AI reply.",
+      });
+    }
+
+    const aiResult = await analyzeJournal(content);
+    const suggestions = buildJournalSuggestions(content, aiResult, mood);
+
+    res.json(suggestions);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

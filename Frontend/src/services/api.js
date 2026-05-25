@@ -19,6 +19,30 @@ export const registerUser = async (data) => {
   return res.json();
 };
 
+export const updateProfileRequest = async (data, token) => {
+  const res = await fetch(`${BASE_URL}/auth/profile`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify(data)
+  });
+  return res.json();
+};
+
+export const updatePasswordRequest = async (data, token) => {
+  const res = await fetch(`${BASE_URL}/auth/password`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify(data)
+  });
+  return res.json();
+};
+
 // ---------------- JOURNALS ----------------
 export const getJournals = async (token) => {
   const res = await fetch(`${BASE_URL}/journals`, {
@@ -63,6 +87,24 @@ export const deleteJournal = async (id, token) => {
     method: "DELETE",
     headers: { Authorization: `Bearer ${token}` }
   });
+  return res.json();
+};
+
+export const getJournalSuggestions = async (data, token) => {
+  const res = await fetch(`${BASE_URL}/journals/suggest`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify(data)
+  });
+
+  if (!res.ok) {
+    const error = await res.json().catch(() => ({}));
+    throw new Error(error.message || "Failed to get suggestions");
+  }
+
   return res.json();
 };
 
