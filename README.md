@@ -9,7 +9,6 @@ MindScribe is a full-stack mental health journaling app that helps users write p
 Add your project screenshot here:
 
 ```md
-![MindScribe Screenshot](./screenshots/mindscribe-dashboard.png)
 ```
 
 Create a `screenshots` folder in the project root and place your screenshot there with the same file name, or update the path above.
