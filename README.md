@@ -233,6 +233,4 @@ Runs ESLint.
 - Add test coverage for backend controllers and frontend components
 - Add deployment instructions
 
-## License
 
-This project is open for learning and personal portfolio use.
