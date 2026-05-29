@@ -1,23 +1,15 @@
+import { createElement } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import {
-  LayoutDashboard, BookOpen, Sparkles,
-  Settings, LogOut, PenLine, Moon,
-} from "lucide-react";
-
-const navItems = [
-  { to: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
-  { to: "/journals",  icon: BookOpen,         label: "Journals"  },
-  { to: "/insights",  icon: Sparkles,          label: "Insights"  },
-  { to: "/settings",  icon: Settings,          label: "Settings"  },
-];
+import { LogOut, Moon, PenLine } from "lucide-react";
+import { navItems } from "./dashboardNav";
 
 export default function Sidebar() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
   return (
-    <aside className="fixed left-0 top-0 h-full w-64 flex flex-col z-40"
+    <aside className="fixed left-0 top-0 z-40 hidden h-full w-64 flex-col lg:flex"
       style={{
         background: "linear-gradient(180deg, #12121a 0%, #0e0e16 100%)",
         borderRight: "1px solid rgba(255,255,255,0.05)",
@@ -44,7 +36,7 @@ export default function Sidebar() {
 
       {/* Nav */}
       <nav className="flex-1 px-3 space-y-1">
-        {navItems.map(({ to, icon: Icon, label }) => (
+        {navItems.map(({ to, icon, label }) => (
           <NavLink key={to} to={to}
             className={({ isActive }) =>
               `flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
@@ -53,7 +45,7 @@ export default function Sidebar() {
                   : "text-ink-400 hover:text-ink-200 hover:bg-white/[0.04]"
               }`
             }>
-            <Icon size={17} />
+            {createElement(icon, { size: 17 })}
             {label}
           </NavLink>
         ))}

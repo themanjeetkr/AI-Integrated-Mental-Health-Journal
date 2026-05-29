@@ -1,3 +1,4 @@
+import { createElement } from "react";
 import { TrendingUp, TrendingDown } from "lucide-react";
 
 const colorMap = {
@@ -31,7 +32,7 @@ const colorMap = {
   },
 };
 
-export default function StatCard({ icon: Icon, label, value, change, changeLabel, color = "sage", delay = 0 }) {
+export default function StatCard({ icon, label, value, change, changeLabel, color = "sage", delay = 0 }) {
   const c = colorMap[color];
   const positive = change >= 0;
 
@@ -48,7 +49,7 @@ export default function StatCard({ icon: Icon, label, value, change, changeLabel
       <div className="flex items-start justify-between mb-4">
         <div className="w-10 h-10 rounded-xl flex items-center justify-center"
           style={{ background: c.icon }}>
-          <Icon size={18} style={{ color: c.iconText }} />
+          {createElement(icon, { size: 18, style: { color: c.iconText } })}
         </div>
         {change !== undefined && (
           <div className={`flex items-center gap-1 text-xs font-medium px-2 py-1 rounded-full ${
