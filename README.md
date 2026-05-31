@@ -1,6 +1,6 @@
 # MindScribe - AI Mental Health Journal
 
-MindScribe is a full-stack mental health journaling app that helps users write private journal entries, track moods, and receive AI-assisted emotional insights. The project includes a React/Vite frontend and an Express/MongoDB backend with JWT authentication.
+MindScribe is a full-stack mental health journaling app for writing private reflections, tracking moods, and receiving supportive AI-assisted insights. It uses a React + Vite frontend, an Express + MongoDB backend, JWT authentication, and Hugging Face emotion analysis.
 
 > This project is for reflection and self-care support. It is not a replacement for professional mental health care.
 
@@ -16,39 +16,22 @@ Create a `screenshots` folder in the project root and place your screenshot ther
 ## Features
 
 - User registration and login with JWT authentication
-- Protected dashboard and journal pages
-- Create, read, update, and delete journal entries
-- Mood selection with mood scores and tags
-- AI-powered emotion analysis using Hugging Face inference
-- Personalized journal suggestions and supportive AI replies
-- Dashboard and insights pages with charts
+- Protected dashboard, journal, insights, and settings pages
+- Create, view, edit, and delete private journal entries
+- Mood selection with AI-assisted emotion detection
+- Supportive AI replies and journal suggestions
+- Mood and emotional insight views with charts
 - Profile and password update settings
-- Responsive React interface built with Vite
+- Responsive React interface with toast notifications
+- Secure backend basics with Helmet, CORS, bcrypt password hashing, and protected routes
 
 ## Tech Stack
 
-### Frontend
-
-- React 19
-- Vite
-- React Router
-- Tailwind CSS
-- Recharts
-- React Hot Toast
-- Lucide React
-- date-fns
-
-### Backend
-
-- Node.js
-- Express
-- MongoDB
-- Mongoose
-- JWT
-- bcryptjs
-- Helmet
-- CORS
-- Hugging Face Inference API
+| Area | Tools |
+| --- | --- |
+| Frontend | React 19, Vite, React Router, Tailwind CSS, Recharts, Lucide React, React Hot Toast |
+| Backend | Node.js, Express, MongoDB, Mongoose, JWT, bcryptjs, Helmet, CORS |
+| AI | Hugging Face Inference API |
 
 ## Project Structure
 
@@ -91,24 +74,24 @@ AI mental Health care/
 
 - Node.js
 - npm
-- MongoDB database
+- MongoDB database connection string
 - Hugging Face API token
 
-### 1. Clone The Repository
+### Clone the Repository
 
 ```bash
 git clone <your-repository-url>
 cd "AI mental Health care"
 ```
 
-### 2. Backend Setup
+### Backend Setup
 
 ```bash
 cd Backend
 npm install
 ```
 
-Create a `.env` file inside the `Backend` folder:
+Create a `.env` file inside `Backend/`:
 
 ```env
 PORT=5000
@@ -117,21 +100,21 @@ JWT_SECRET=your_jwt_secret
 HUGGINGFACE_API_TOKEN=your_huggingface_api_token
 ```
 
-Start the backend server:
+Start the backend:
 
 ```bash
 npm run server
 ```
 
-The backend runs on:
+The API will run at:
 
 ```txt
 http://localhost:5000
 ```
 
-### 3. Frontend Setup
+### Frontend Setup
 
-Open a new terminal:
+Open a second terminal:
 
 ```bash
 cd Frontend
@@ -139,33 +122,66 @@ npm install
 npm run dev
 ```
 
-The frontend runs on:
+The app will run at:
 
 ```txt
 http://localhost:5173
 ```
 
+## Environment Variables
+
+| Variable | Location | Description |
+| --- | --- | --- |
+| `PORT` | `Backend/.env` | Backend server port |
+| `MONGO_URI` | `Backend/.env` | MongoDB connection string |
+| `JWT_SECRET` | `Backend/.env` | Secret used to sign JWT tokens |
+| `HUGGINGFACE_API_TOKEN` | `Backend/.env` | Token used for Hugging Face emotion analysis |
+
+## Available Scripts
+
+### Backend
+
+| Command | Description |
+| --- | --- |
+| `npm run server` | Starts the Express server with Nodemon |
+| `npm test` | Placeholder test script |
+
+### Frontend
+
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Starts the Vite development server |
+| `npm run build` | Builds the frontend for production |
+| `npm run preview` | Serves the production build locally |
+| `npm run lint` | Runs ESLint |
+
 ## API Endpoints
 
-### Auth
+### Health Check
 
 | Method | Endpoint | Description |
 | --- | --- | --- |
-| POST | `/api/auth/register` | Register a new user |
-| POST | `/api/auth/login` | Login user and return token |
-| PUT | `/api/auth/profile` | Update user profile |
-| PUT | `/api/auth/password` | Update user password |
+| GET | `/api` | Confirms the API is running |
+
+### Authentication
+
+| Method | Endpoint | Description | Protected |
+| --- | --- | --- | --- |
+| POST | `/api/auth/register` | Register a new user | No |
+| POST | `/api/auth/login` | Login and receive a token | No |
+| PUT | `/api/auth/profile` | Update user profile | Yes |
+| PUT | `/api/auth/password` | Update user password | Yes |
 
 ### Journals
 
-| Method | Endpoint | Description |
-| --- | --- | --- |
-| GET | `/api/journals` | Get all journals for logged-in user |
-| POST | `/api/journals` | Create a new journal |
-| GET | `/api/journals/:id` | Get a single journal |
-| PUT | `/api/journals/:id` | Update a journal |
-| DELETE | `/api/journals/:id` | Delete a journal |
-| POST | `/api/journals/suggest` | Get AI suggestions for journal content |
+| Method | Endpoint | Description | Protected |
+| --- | --- | --- | --- |
+| GET | `/api/journals` | Get all journals for the logged-in user | Yes |
+| POST | `/api/journals` | Create a new journal entry | Yes |
+| POST | `/api/journals/suggest` | Get AI suggestions for journal content | Yes |
+| GET | `/api/journals/:id` | Get a single journal entry | Yes |
+| PUT | `/api/journals/:id` | Update a journal entry | Yes |
+| DELETE | `/api/journals/:id` | Delete a journal entry | Yes |
 
 Protected routes require this header:
 
@@ -173,63 +189,45 @@ Protected routes require this header:
 Authorization: Bearer <token>
 ```
 
-## Pages
+## App Routes
 
 | Route | Description |
 | --- | --- |
 | `/` | Homepage |
-| `/login` | Login and registration |
+| `/login` | Authentication page |
 | `/dashboard` | User dashboard |
 | `/journals` | Journal list |
-| `/journals/new` | Create journal |
+| `/journals/new` | Create journal entry |
 | `/journals/:id` | View journal details |
-| `/journals/:id/edit` | Edit journal |
+| `/journals/:id/edit` | Edit journal entry |
 | `/insights` | Mood and emotional insights |
 | `/settings` | Profile and password settings |
 
 ## How AI Analysis Works
 
-When a user writes a journal entry, the backend sends the content to a Hugging Face emotion classification model. The app uses the result to detect the main emotion, estimate sentiment, map the emotion to a mood, and generate supportive suggestions.
+When a user writes a journal entry, the backend sends the content to a Hugging Face emotion classification model. The result is used to identify the primary emotion, estimate sentiment, map the emotion to a mood, and generate supportive suggestions.
 
-If the AI request fails, the app still keeps the journal entry and can fall back to local mood rules.
+If the AI request fails, the app still saves the journal entry and falls back to local mood and keyword rules.
 
-## Available Scripts
+## Screenshot
 
-### Backend
+Add a screenshot to show the dashboard or journal experience:
 
-```bash
-npm run server
+```md
+![MindScribe Dashboard](./screenshots/mindscribe-dashboard.png)
 ```
 
-Starts the Express server using Nodemon.
-
-### Frontend
-
-```bash
-npm run dev
-```
-
-Starts the Vite development server.
-
-```bash
-npm run build
-```
-
-Builds the frontend for production.
-
-```bash
-npm run lint
-```
-
-Runs ESLint.
+Create a `screenshots/` folder in the project root and place the image there, or update the path to match your screenshot file.
 
 ## Future Improvements
 
-- Add screenshot images to the README
-- Add loading and error states for every API request
-- Add frontend environment variable support for API base URL
-- Add journal search and filtering
-- Add test coverage for backend controllers and frontend components
-- Add deployment instructions
+- Add deployment instructions for the frontend and backend
+- Add frontend environment variable support for the API base URL
+- Add journal search, filtering, and sorting
+- Add more complete loading and error states
+- Add automated tests for backend controllers and frontend flows
+- Add crisis-resource messaging for high-risk emotional entries
 
+## License
 
+This project is currently marked as ISC in the backend package metadata.
