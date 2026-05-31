@@ -2,7 +2,16 @@
 
 MindScribe is a full-stack mental health journaling app for writing private reflections, tracking moods, and receiving supportive AI-assisted insights. It uses a React + Vite frontend, an Express + MongoDB backend, JWT authentication, and Hugging Face emotion analysis.
 
-> MindScribe is designed for reflection and self-care support only. It is not a substitute for professional mental health care, diagnosis, or emergency support.
+> This project is for reflection and self-care support. It is not a replacement for professional mental health care.
+
+## Screenshot
+
+Add your project screenshot here:
+
+```md
+```
+
+Create a `screenshots` folder in the project root and place your screenshot there with the same file name, or update the path above.
 
 ## Features
 
