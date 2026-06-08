@@ -12,7 +12,7 @@ import {
   YAxis,
 } from "recharts";
 import { format, subDays } from "date-fns";
-import { BarChart3, Loader2, Save, Utensils } from "lucide-react";
+import { BarChart3, Loader2, Save } from "lucide-react";
 import DashboardLayout from "../components/layout/DashboardLayout";
 import MealBreakdown from "../components/nutrition/MealBreakdown";
 import MealHistory from "../components/nutrition/MealHistory";
@@ -200,10 +200,6 @@ export default function NutritionAnalyzer() {
           <p className="mt-1 text-sm text-ink-500">
             Analyze meals, save nutrition history, and track daily intake.
           </p>
-        </div>
-        <div className="flex items-center gap-2 rounded-2xl bg-white/[0.04] px-3 py-2 text-xs text-ink-400">
-          <Utensils size={15} className="text-sage-400" />
-          USDA FoodData Central
         </div>
       </div>
 

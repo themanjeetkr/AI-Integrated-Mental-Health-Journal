@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import {
   ArrowLeft,
   Lightbulb,
-  MessageSquareReply,
   Save,
   Loader2,
 } from "lucide-react";
@@ -211,10 +210,6 @@ export default function JournalEditor() {
 
               {aiReply && (
                 <div className="mt-4 rounded-xl bg-green-500/10 border border-green-500/20 px-4 py-3">
-                  <div className="flex items-center gap-2 text-xs font-semibold text-green-300 mb-2">
-                    <MessageSquareReply size={14} />
-                    Server Reply
-                  </div>
                   <p className="text-sm leading-6 text-ink-200">{aiReply}</p>
                 </div>
               )}
@@ -281,9 +276,7 @@ export default function JournalEditor() {
                 </ul>
               </div>
             ) : (
-              <p className="text-xs leading-5 text-ink-500">
-                Finish writing and the server reply will appear automatically.
-              </p>
+              null
             )}
           </aside>
         </div>

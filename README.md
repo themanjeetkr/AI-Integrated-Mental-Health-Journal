@@ -1,6 +1,6 @@
-# MindScribe - AI Mental Health Journal
+# MindScribe - AI Mental Health Care
 
-MindScribe is a full-stack mental health journaling app for writing private reflections, tracking moods, and receiving supportive AI-assisted insights. It uses a React + Vite frontend, an Express + MongoDB backend, JWT authentication, and Hugging Face emotion analysis.
+MindScribe is a full-stack wellness application for private journaling, mood tracking, AI-assisted reflection, mental health insights, and meal nutrition tracking. It includes a React dashboard experience, protected user accounts, journal CRUD, AI suggestions, emotional charts, and a nutrition analyzer with meal history.
 
 > This project is for reflection and self-care support. It is not a replacement for professional mental health care.
 
@@ -16,14 +16,37 @@ Create a `screenshots` folder in the project root and place your screenshot ther
 ## Features
 
 - User registration and login with JWT authentication
-- Protected dashboard, journal, insights, and settings pages
-- Create, view, edit, and delete private journal entries
-- Mood selection with AI-assisted emotion detection
-- Supportive AI replies and journal suggestions
-- Mood and emotional insight views with charts
-- Profile and password update settings
-- Responsive React interface with toast notifications
-- Secure backend basics with Helmet, CORS, bcrypt password hashing, and protected routes
+- Protected dashboard, journals, insights, nutrition, and settings pages
+- Create, view, edit, and delete personal journal entries
+- Mood selection and AI-assisted mood detection
+- Supportive AI replies and writing suggestions
+- Dashboard cards for journal count, mood score, weekly activity, and insights
+- Mood distribution and emotional balance charts
+- Nutrition and meal analyzer with calories, protein, carbs, fat, and fiber totals
+- Meal breakdown, meal history, daily trend, and weekly trend analytics
+- Profile and password settings
+- Responsive dark UI built with React, Tailwind CSS, Recharts, Lucide icons, and toast notifications
+- Express backend with MongoDB, Mongoose, JWT, bcrypt, Helmet, and CORS
+
+## Screenshots
+
+Add your screenshots to a `screenshots/` folder in the project root and use these filenames:
+
+```txt
+screenshots/dashboard.png
+screenshots/new-entry.png
+screenshots/insights.png
+screenshots/nutrition-analyzer.png
+screenshots/nutrition-breakdown.png
+```
+
+Then they will render here:
+
+![Dashboard](./screenshots/dashboard.png)
+![New Entry](./screenshots/new-entry.png)
+![Insights](./screenshots/insights.png)
+![Nutrition Analyzer](./screenshots/nutrition-analyzer.png)
+![Nutrition Breakdown](./screenshots/nutrition-breakdown.png)
 
 ## Tech Stack
 
@@ -32,6 +55,7 @@ Create a `screenshots` folder in the project root and place your screenshot ther
 | Frontend | React 19, Vite, React Router, Tailwind CSS, Recharts, Lucide React, React Hot Toast |
 | Backend | Node.js, Express, MongoDB, Mongoose, JWT, bcryptjs, Helmet, CORS |
 | AI | Hugging Face Inference API |
+| Nutrition | External food nutrition API integration |
 
 ## Project Structure
 
@@ -39,24 +63,18 @@ Create a `screenshots` folder in the project root and place your screenshot ther
 AI mental Health care/
 +-- Backend/
 |   +-- config/
-|   |   +-- db.js
 |   +-- controllers/
-|   |   +-- authController.js
-|   |   +-- journalController.js
 |   +-- middlewares/
-|   |   +-- authMiddlewares.js
 |   +-- models/
-|   |   +-- Journal.js
-|   |   +-- User.js
 |   +-- routes/
-|   |   +-- AuthRoutes.js
-|   |   +-- journalRoutes.js
+|   +-- services/
 |   +-- utils/
-|   |   +-- aiAnalysis.js
 |   +-- package.json
 |   +-- server.js
 +-- Frontend/
+|   +-- public/
 |   +-- src/
+|   |   +-- api/
 |   |   +-- components/
 |   |   +-- context/
 |   |   +-- pages/
@@ -74,8 +92,9 @@ AI mental Health care/
 
 - Node.js
 - npm
-- MongoDB database connection string
+- MongoDB connection string
 - Hugging Face API token
+- Food nutrition API key
 
 ### Clone the Repository
 
@@ -98,6 +117,7 @@ PORT=5000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 HUGGINGFACE_API_TOKEN=your_huggingface_api_token
+USDA_API_KEY=your_food_api_key
 ```
 
 Start the backend:
@@ -106,7 +126,7 @@ Start the backend:
 npm run server
 ```
 
-The API will run at:
+The backend runs at:
 
 ```txt
 http://localhost:5000
@@ -122,7 +142,7 @@ npm install
 npm run dev
 ```
 
-The app will run at:
+The frontend runs at:
 
 ```txt
 http://localhost:5173
@@ -133,9 +153,10 @@ http://localhost:5173
 | Variable | Location | Description |
 | --- | --- | --- |
 | `PORT` | `Backend/.env` | Backend server port |
-| `MONGO_URI` | `Backend/.env` | MongoDB connection string |
+| `MONGO_URI` | `Backend/.env` | MongoDB database connection string |
 | `JWT_SECRET` | `Backend/.env` | Secret used to sign JWT tokens |
-| `HUGGINGFACE_API_TOKEN` | `Backend/.env` | Token used for Hugging Face emotion analysis |
+| `HUGGINGFACE_API_TOKEN` | `Backend/.env` | Token used for journal emotion analysis |
+| `USDA_API_KEY` | `Backend/.env` | API key used for nutrition analysis |
 
 ## Available Scripts
 
@@ -157,6 +178,12 @@ http://localhost:5173
 
 ## API Endpoints
 
+Protected routes require this header:
+
+```txt
+Authorization: Bearer <token>
+```
+
 ### Health Check
 
 | Method | Endpoint | Description |
@@ -169,8 +196,8 @@ http://localhost:5173
 | --- | --- | --- | --- |
 | POST | `/api/auth/register` | Register a new user | No |
 | POST | `/api/auth/login` | Login and receive a token | No |
-| PUT | `/api/auth/profile` | Update user profile | Yes |
-| PUT | `/api/auth/password` | Update user password | Yes |
+| PUT | `/api/auth/profile` | Update profile details | Yes |
+| PUT | `/api/auth/password` | Update account password | Yes |
 
 ### Journals
 
@@ -183,11 +210,15 @@ http://localhost:5173
 | PUT | `/api/journals/:id` | Update a journal entry | Yes |
 | DELETE | `/api/journals/:id` | Delete a journal entry | Yes |
 
-Protected routes require this header:
+### Meals
 
-```txt
-Authorization: Bearer <token>
-```
+| Method | Endpoint | Description | Protected |
+| --- | --- | --- | --- |
+| POST | `/api/meals/analyze` | Analyze meal text and return nutrition totals | Yes |
+| POST | `/api/meals/save` | Save analyzed meal data | Yes |
+| GET | `/api/meals/history` | Get recent saved meals | Yes |
+| GET | `/api/meals/today-summary` | Get today's nutrition totals | Yes |
+| DELETE | `/api/meals/:id` | Delete a saved meal | Yes |
 
 ## App Routes
 
@@ -195,38 +226,39 @@ Authorization: Bearer <token>
 | --- | --- |
 | `/` | Homepage |
 | `/login` | Authentication page |
-| `/dashboard` | User dashboard |
+| `/dashboard` | Dashboard overview |
 | `/journals` | Journal list |
 | `/journals/new` | Create journal entry |
 | `/journals/:id` | View journal details |
 | `/journals/:id/edit` | Edit journal entry |
 | `/insights` | Mood and emotional insights |
+| `/nutrition` | Nutrition and meal analyzer |
 | `/settings` | Profile and password settings |
 
-## How AI Analysis Works
+## How AI Suggestions Work
 
-When a user writes a journal entry, the backend sends the content to a Hugging Face emotion classification model. The result is used to identify the primary emotion, estimate sentiment, map the emotion to a mood, and generate supportive suggestions.
+When a user writes a journal entry, the backend can send the content to a Hugging Face emotion classification model. The app uses the result to detect a likely mood and generate supportive suggestions. If the AI request fails, the app can still rely on saved user input and local fallback behavior.
 
-If the AI request fails, the app still saves the journal entry and falls back to local mood and keyword rules.
+## How Nutrition Analysis Works
 
-## Screenshot
+The nutrition analyzer accepts one food item per line, such as:
 
-Add a screenshot to show the dashboard or journal experience:
-
-```md
-![MindScribe Dashboard](./screenshots/mindscribe-dashboard.png)
+```txt
+2 bananas
+1 apple
+1 glass milk
 ```
 
-Create a `screenshots/` folder in the project root and place the image there, or update the path to match your screenshot file.
+The backend parses each line, estimates nutrition values, returns a food breakdown, and allows the user to save the meal. Saved meals power today's summary, meal history, and calorie trend charts.
 
 ## Future Improvements
 
-- Add deployment instructions for the frontend and backend
-- Add frontend environment variable support for the API base URL
-- Add journal search, filtering, and sorting
-- Add more complete loading and error states
-- Add automated tests for backend controllers and frontend flows
-- Add crisis-resource messaging for high-risk emotional entries
+- Add production deployment instructions
+- Add frontend API base URL environment configuration
+- Add automated backend and frontend tests
+- Add export options for journals and meal history
+- Add richer safety messaging for high-risk emotional entries
+- Add more complete nutrition serving-size controls
 
 ## License
 
