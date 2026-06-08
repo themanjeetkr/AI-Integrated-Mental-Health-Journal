@@ -2,7 +2,16 @@
 
 MindScribe is a full-stack wellness application for private journaling, mood tracking, AI-assisted reflection, mental health insights, and meal nutrition tracking. It includes a React dashboard experience, protected user accounts, journal CRUD, AI suggestions, emotional charts, and a nutrition analyzer with meal history.
 
-> MindScribe is a self-reflection and wellness support tool. It is not a replacement for professional mental health care, diagnosis, treatment, or emergency support.
+> This project is for reflection and self-care support. It is not a replacement for professional mental health care.
+
+## Screenshot
+
+Add your project screenshot here:
+
+```md
+```
+
+Create a `screenshots` folder in the project root and place your screenshot there with the same file name, or update the path above.
 
 ## Features
 
