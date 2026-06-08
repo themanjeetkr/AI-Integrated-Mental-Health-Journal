@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
@@ -53,6 +53,7 @@ export default function Dashboard() {
   const { user } = useAuth();
   const { journals, fetchJournals, loading } = useJournals();
   const navigate = useNavigate();
+  const [now] = useState(() => Date.now());
 
   useEffect(() => { fetchJournals(); }, [fetchJournals]);
 
@@ -65,9 +66,9 @@ export default function Dashboard() {
   }, [journals]);
 
   const thisWeek = useMemo(() => {
-    const weekAgo = Date.now() - 7 * 86400000;
+    const weekAgo = now - 7 * 86400000;
     return journals.filter((j) => new Date(j.createdAt) > weekAgo).length;
-  }, [journals]);
+  }, [journals, now]);
 
   const aiInsights = [
     { title: "Mood Pattern", text: "You tend to feel more positive on weekdays. Consider what's different on weekends.", color: "#6aab99" },
@@ -82,8 +83,8 @@ export default function Dashboard() {
   return (
     <DashboardLayout title="Dashboard">
       {/* Welcome */}
-      <div className="mb-8">
-        <h2 className="font-display text-2xl font-semibold text-ink-100">
+      <div className="mb-6 sm:mb-8">
+        <h2 className="font-display text-xl font-semibold text-ink-100 sm:text-2xl">
           {greeting}, <span className="text-gradient-sage">{firstName}</span> ✨
         </h2>
         <p className="text-ink-500 text-sm mt-1">
@@ -92,7 +93,7 @@ export default function Dashboard() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-1 min-[420px]:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8">
         <StatCard icon={BookOpen} label="Total Journals" value={journals.length} change={12} changeLabel="vs last month" color="sage" delay={0} />
         <StatCard icon={Brain} label="Avg Mood Score" value={avgMood} color="amber" delay={100} />
         <StatCard icon={Flame} label="This Week" value={thisWeek} change={thisWeek > 3 ? 20 : -10} color="rose" delay={200} />

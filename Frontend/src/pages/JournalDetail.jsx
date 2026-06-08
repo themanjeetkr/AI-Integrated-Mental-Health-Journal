@@ -11,7 +11,7 @@ export default function JournalDetail() {
   const navigate = useNavigate();
   const { currentJournal, fetchJournalById, removeJournal, loading } = useJournals();
 
-  useEffect(() => { fetchJournalById(id); }, [id]);
+  useEffect(() => { fetchJournalById(id); }, [id, fetchJournalById]);
 
   if (loading) {
     return (
@@ -87,6 +87,14 @@ export default function JournalDetail() {
             <p className="text-sm text-ink-300 leading-relaxed whitespace-pre-wrap">
               {currentJournal.content || "No content."}
             </p>
+
+            {currentJournal.aiReply && (
+              <div className="mt-5 rounded-xl bg-green-500/10 border border-green-500/20 px-4 py-3">
+                <p className="text-sm leading-6 text-ink-200">
+                  {currentJournal.aiReply}
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>

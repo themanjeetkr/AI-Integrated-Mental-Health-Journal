@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import { Search, Bell, ChevronDown, LogOut, Settings, User } from "lucide-react";
+import { Search, Bell, ChevronDown, LogOut, Settings, Moon } from "lucide-react";
 
 export default function Navbar({ title = "Dashboard" }) {
   const { user, logout } = useAuth();
@@ -10,7 +10,7 @@ export default function Navbar({ title = "Dashboard" }) {
   const [searchVal, setSearchVal] = useState("");
 
   return (
-    <header className="h-16 flex items-center px-6 gap-4"
+    <header className="h-16 flex items-center px-4 sm:px-5 lg:px-6 gap-3 sm:gap-4"
       style={{
         background: "rgba(10,10,15,0.8)",
         backdropFilter: "blur(16px)",
@@ -19,7 +19,17 @@ export default function Navbar({ title = "Dashboard" }) {
         top: 0,
         zIndex: 30,
       }}>
-      <h1 className="font-display text-lg font-semibold text-ink-100 mr-auto">{title}</h1>
+      <div className="flex min-w-0 items-center gap-3 mr-auto">
+        <div className="grid h-9 w-9 flex-shrink-0 place-items-center rounded-xl bg-sage-600/80 lg:hidden">
+          <Moon size={17} color="white" />
+        </div>
+        <div className="min-w-0">
+          <p className="hidden text-[11px] font-medium uppercase text-sage-300 sm:block lg:hidden">
+            MindScribe
+          </p>
+          <h1 className="truncate font-display text-lg font-semibold text-ink-100">{title}</h1>
+        </div>
+      </div>
 
       {/* Search */}
       <div className="relative hidden md:block">
@@ -30,7 +40,7 @@ export default function Navbar({ title = "Dashboard" }) {
       </div>
 
       {/* Bell */}
-      <button className="relative w-9 h-9 rounded-lg flex items-center justify-center btn-ghost">
+      <button className="relative flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg btn-ghost">
         <Bell size={16} />
         <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-amber-400" />
       </button>
@@ -38,7 +48,7 @@ export default function Navbar({ title = "Dashboard" }) {
       {/* Profile */}
       <div className="relative">
         <button onClick={() => setProfileOpen((p) => !p)}
-          className="flex items-center gap-2 px-3 py-1.5 rounded-lg btn-ghost">
+          className="flex items-center gap-2 rounded-lg px-2 py-1.5 sm:px-3 btn-ghost">
           <div className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-semibold"
             style={{ background: "linear-gradient(135deg, #4e8c7c, #6aab99)" }}>
             {(user?.name || user?.email || "U")[0].toUpperCase()}
@@ -46,7 +56,7 @@ export default function Navbar({ title = "Dashboard" }) {
           <span className="text-sm font-medium text-ink-200 hidden md:block">
             {user?.name?.split(" ")[0] || "Account"}
           </span>
-          <ChevronDown size={13} className={`text-ink-500 transition-transform ${profileOpen ? "rotate-180" : ""}`} />
+          <ChevronDown size={13} className={`hidden text-ink-500 transition-transform sm:block ${profileOpen ? "rotate-180" : ""}`} />
         </button>
 
         {profileOpen && (
