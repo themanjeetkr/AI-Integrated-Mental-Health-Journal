@@ -45,8 +45,8 @@ export default function Sidebar() {
                   : "text-ink-400 hover:text-ink-200 hover:bg-white/[0.04]"
               }`
             }>
-            {createElement(icon, { size: 17 })}
-            {label}
+            {createElement(icon, { size: 17, className: "shrink-0" })}
+            <span className="truncate">{label}</span>
           </NavLink>
         ))}
       </nav>

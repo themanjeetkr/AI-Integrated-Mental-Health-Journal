@@ -1,4 +1,10 @@
+import axios from "axios";
+
 const BASE_URL = "http://localhost:5000/api";
+
+const getAuthHeaders = (token) => ({
+  Authorization: `Bearer ${token}`,
+});
 
 // ---------------- AUTH ----------------
 export const loginUser = async (data) => {
@@ -114,4 +120,44 @@ export const getEmotionStats = async (token) => {
     headers: { Authorization: `Bearer ${token}` }
   });
   return res.json();
+};
+
+// ---------------- MEALS ----------------
+export const analyzeMealRequest = async (mealText, token) => {
+  const { data } = await axios.post(
+    `${BASE_URL}/meals/analyze`,
+    { mealText },
+    { headers: getAuthHeaders(token) }
+  );
+  return data;
+};
+
+export const saveMealRequest = async (analysis, token) => {
+  const { data } = await axios.post(
+    `${BASE_URL}/meals/save`,
+    analysis,
+    { headers: getAuthHeaders(token) }
+  );
+  return data;
+};
+
+export const getMealHistoryRequest = async (token) => {
+  const { data } = await axios.get(`${BASE_URL}/meals/history`, {
+    headers: getAuthHeaders(token),
+  });
+  return data;
+};
+
+export const getTodayNutritionSummaryRequest = async (token) => {
+  const { data } = await axios.get(`${BASE_URL}/meals/today-summary`, {
+    headers: getAuthHeaders(token),
+  });
+  return data;
+};
+
+export const deleteMealRequest = async (id, token) => {
+  const { data } = await axios.delete(`${BASE_URL}/meals/${id}`, {
+    headers: getAuthHeaders(token),
+  });
+  return data;
 };
