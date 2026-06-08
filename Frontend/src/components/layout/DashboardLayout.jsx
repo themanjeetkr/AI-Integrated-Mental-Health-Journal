@@ -11,7 +11,7 @@ function MobileBottomNav() {
   return (
     <nav className="mobile-bottom-nav lg:hidden" aria-label="Primary mobile navigation">
       <div className="mobile-bottom-nav-inner">
-        {navItems.slice(0, 2).map(({ to, icon, label }) => (
+        {navItems.slice(0, 2).map(({ to, icon, label, shortLabel }) => (
           <NavLink
             key={to}
             to={to}
@@ -20,7 +20,7 @@ function MobileBottomNav() {
             }
           >
             {createElement(icon, { size: 18 })}
-            <span>{label}</span>
+            <span>{shortLabel || label}</span>
           </NavLink>
         ))}
 
@@ -33,7 +33,7 @@ function MobileBottomNav() {
           <PenLine size={20} />
         </button>
 
-        {navItems.slice(2).map(({ to, icon, label }) => (
+        {navItems.slice(2).map(({ to, icon, label, shortLabel }) => (
           <NavLink
             key={to}
             to={to}
@@ -42,7 +42,7 @@ function MobileBottomNav() {
             }
           >
             {createElement(icon, { size: 18 })}
-            <span>{label}</span>
+            <span>{shortLabel || label}</span>
           </NavLink>
         ))}
       </div>
