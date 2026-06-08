@@ -31,7 +31,6 @@ export default function MealBreakdown({ foods = [] }) {
           <div key={`${food.name}-${index}`} className="grid gap-3 px-4 py-4 md:grid-cols-[1.4fr_repeat(5,1fr)] md:items-center">
             <div>
               <p className="text-sm font-semibold text-ink-100">{food.name}</p>
-              <p className="text-xs text-ink-500">USDA FoodData Central match</p>
             </div>
 
             <div className="grid grid-cols-2 gap-2 min-[460px]:grid-cols-5 md:contents">

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { ArrowLeft, Edit3, MessageSquareReply, Trash2 } from "lucide-react";
+import { ArrowLeft, Edit3, Trash2 } from "lucide-react";
 import { format } from "date-fns";
 import DashboardLayout from "../components/layout/DashboardLayout";
 import MoodBadge from "../components/ui/MoodBadge";
@@ -90,10 +90,6 @@ export default function JournalDetail() {
 
             {currentJournal.aiReply && (
               <div className="mt-5 rounded-xl bg-green-500/10 border border-green-500/20 px-4 py-3">
-                <div className="flex items-center gap-2 text-xs font-semibold text-green-300 mb-2">
-                  <MessageSquareReply size={14} />
-                  Server Reply
-                </div>
                 <p className="text-sm leading-6 text-ink-200">
                   {currentJournal.aiReply}
                 </p>
