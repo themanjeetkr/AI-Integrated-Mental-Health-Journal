@@ -29,17 +29,6 @@ Create a `screenshots` folder in the project root and place your screenshot ther
 - Responsive dark UI built with React, Tailwind CSS, Recharts, Lucide icons, and toast notifications
 - Express backend with MongoDB, Mongoose, JWT, bcrypt, Helmet, and CORS
 
-## Screenshots
-
-Add your screenshots to a `screenshots/` folder in the project root and use these filenames:
-
-```txt
-screenshots/dashboard.png
-screenshots/new-entry.png
-screenshots/insights.png
-screenshots/nutrition-analyzer.png
-screenshots/nutrition-breakdown.png
-```
 
 Then they will render here:
 
