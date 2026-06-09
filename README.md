@@ -42,11 +42,11 @@ screenshots/nutrition-breakdown.png
 
 Then they will render here:
 
-![Dashboard](./screenshots/dashboard.png)
-![New Entry](./screenshots/new-entry.png)
-![Insights](./screenshots/insights.png)
-![Nutrition Analyzer](./screenshots/nutrition-analyzer.png)
-![Nutrition Breakdown](./screenshots/nutrition-breakdown.png)
+<img width="1915" height="863" alt="Screenshot 2026-06-08 195833" src="https://github.com/user-attachments/assets/165e953a-28cc-48ca-b055-ebd011f54436" />
+<img width="1918" height="872" alt="Screenshot 2026-06-08 200017" src="https://github.com/user-attachments/assets/28b93e8f-1c4b-4675-9ec7-5872c5247072" />
+<img width="1918" height="862" alt="Screenshot 2026-06-08 200042" src="https://github.com/user-attachments/assets/49703324-87d8-4431-86cf-7d2b47e4ae05" />
+<img width="1918" height="875" alt="Screenshot 2026-06-08 200112" src="https://github.com/user-attachments/assets/b34d1218-ad80-4f23-bf07-452697df630d" />
+
 
 ## Tech Stack
 
@@ -260,6 +260,3 @@ The backend parses each line, estimates nutrition values, returns a food breakdo
 - Add richer safety messaging for high-risk emotional entries
 - Add more complete nutrition serving-size controls
 
-## License
-
-This project is currently marked as ISC in the backend package metadata.
