@@ -5,11 +5,12 @@ MindScribe is a full-stack wellness application for private journaling, mood tra
 > This project is for reflection and self-care support. It is not a replacement for professional mental health care.
 
 ## Screenshot
+<img width="1915" height="863" alt="Screenshot 2026-06-08 195833" src="https://github.com/user-attachments/assets/e7cb63ff-378a-4d9c-b3f4-2faa5336c064" />
+<img width="1915" height="866" alt="Screenshot 2026-06-09 185020" src="https://github.com/user-attachments/assets/a201d8b7-1249-4da9-924c-43e791a7b2cf" />
+<img width="1918" height="866" alt="Screenshot 2026-06-09 184944" src="https://github.com/user-attachments/assets/7a5bf24f-c0e7-44ad-8ae8-5b822675317d" />
 
-Add your project screenshot here:
 
-```md
-```
+
 
 Create a `screenshots` folder in the project root and place your screenshot there with the same file name, or update the path above.
 
