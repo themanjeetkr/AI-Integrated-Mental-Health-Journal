@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:5000/api";
+const BASE_URL = "https://ai-integrated-mental-health-journal.onrender.com/api";
 
 const getAuthHeaders = (token) => ({
   Authorization: `Bearer ${token}`,
