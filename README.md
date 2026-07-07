@@ -2,7 +2,17 @@
 
 MindScribe is a full-stack wellness application for private journaling, mood tracking, AI-assisted reflection, mental health insights, and meal nutrition tracking. It includes a React dashboard experience, protected user accounts, journal CRUD, AI suggestions, emotional charts, and a nutrition analyzer with meal history.
 
-> MindScribe is a self-reflection and wellness support tool. It is not a replacement for professional mental health care, diagnosis, treatment, or emergency support.
+> This project is for reflection and self-care support. It is not a replacement for professional mental health care.
+
+## Screenshot
+<img width="1915" height="863" alt="Screenshot 2026-06-08 195833" src="https://github.com/user-attachments/assets/e7cb63ff-378a-4d9c-b3f4-2faa5336c064" />
+<img width="1915" height="866" alt="Screenshot 2026-06-09 185020" src="https://github.com/user-attachments/assets/a201d8b7-1249-4da9-924c-43e791a7b2cf" />
+<img width="1918" height="866" alt="Screenshot 2026-06-09 184944" src="https://github.com/user-attachments/assets/7a5bf24f-c0e7-44ad-8ae8-5b822675317d" />
+
+
+
+
+Create a `screenshots` folder in the project root and place your screenshot there with the same file name, or update the path above.
 
 ## Features
 
@@ -19,25 +29,14 @@ MindScribe is a full-stack wellness application for private journaling, mood tra
 - Responsive dark UI built with React, Tailwind CSS, Recharts, Lucide icons, and toast notifications
 - Express backend with MongoDB, Mongoose, JWT, bcrypt, Helmet, and CORS
 
-## Screenshots
-
-Add your screenshots to a `screenshots/` folder in the project root and use these filenames:
-
-```txt
-screenshots/dashboard.png
-screenshots/new-entry.png
-screenshots/insights.png
-screenshots/nutrition-analyzer.png
-screenshots/nutrition-breakdown.png
-```
 
 Then they will render here:
 
-![Dashboard](./screenshots/dashboard.png)
-![New Entry](./screenshots/new-entry.png)
-![Insights](./screenshots/insights.png)
-![Nutrition Analyzer](./screenshots/nutrition-analyzer.png)
-![Nutrition Breakdown](./screenshots/nutrition-breakdown.png)
+<img width="1915" height="863" alt="Screenshot 2026-06-08 195833" src="https://github.com/user-attachments/assets/165e953a-28cc-48ca-b055-ebd011f54436" />
+<img width="1918" height="872" alt="Screenshot 2026-06-08 200017" src="https://github.com/user-attachments/assets/28b93e8f-1c4b-4675-9ec7-5872c5247072" />
+<img width="1918" height="862" alt="Screenshot 2026-06-08 200042" src="https://github.com/user-attachments/assets/49703324-87d8-4431-86cf-7d2b47e4ae05" />
+<img width="1918" height="875" alt="Screenshot 2026-06-08 200112" src="https://github.com/user-attachments/assets/b34d1218-ad80-4f23-bf07-452697df630d" />
+
 
 ## Tech Stack
 
@@ -251,6 +250,3 @@ The backend parses each line, estimates nutrition values, returns a food breakdo
 - Add richer safety messaging for high-risk emotional entries
 - Add more complete nutrition serving-size controls
 
-## License
-
-This project is currently marked as ISC in the backend package metadata.
