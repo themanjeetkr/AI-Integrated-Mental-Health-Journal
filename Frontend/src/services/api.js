@@ -1,6 +1,36 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:5000/api";
+const PRODUCTION_API_BASE_URL =
+  "https://ai-integrated-mental-health-journal.onrender.com/api";
+
+const normalizeApiBaseUrl = () => {
+  const configuredUrl = import.meta.env.VITE_API_BASE_URL?.trim();
+  const isProduction = import.meta.env.PROD;
+  const isBrowser = typeof window !== "undefined";
+  const isLocalPage =
+    isBrowser &&
+    ["localhost", "127.0.0.1"].includes(window.location.hostname);
+
+  if (configuredUrl) {
+    if (
+      isProduction &&
+      isBrowser &&
+      !isLocalPage &&
+      /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?/i.test(configuredUrl)
+    ) {
+      return PRODUCTION_API_BASE_URL;
+    }
+
+    const withoutTrailingSlash = configuredUrl.replace(/\/+$/, "");
+    return withoutTrailingSlash.endsWith("/api")
+      ? withoutTrailingSlash
+      : `${withoutTrailingSlash}/api`;
+  }
+
+  return isProduction ? PRODUCTION_API_BASE_URL : "http://localhost:5000/api";
+};
+
+const BASE_URL = normalizeApiBaseUrl();
 
 const getAuthHeaders = (token) => ({
   Authorization: `Bearer ${token}`,
