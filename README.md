@@ -155,24 +155,7 @@ http://localhost:5173
 | `USDA_API_KEY` | `Backend/.env` | API key used for nutrition analysis |
 | `VITE_API_BASE_URL` | `Frontend/.env` | Backend API base URL. Use `http://localhost:5000/api` locally and your deployed backend URL plus `/api` in production. |
 
-## Production Deployment
 
-Do not use `localhost` in production environment variables. In the browser, `localhost` means the user's own computer, not your backend server.
-
-For Vercel frontend deployment, set this environment variable in the Vercel project settings:
-
-```env
-VITE_API_BASE_URL=https://ai-integrated-mental-health-journal.onrender.com/api
-```
-
-Then redeploy the frontend. Vite includes `VITE_*` variables during the build, so changing this value requires a new deployment.
-
-For backend deployment, set the `Backend/` folder as the service root when your host asks for it, and use:
-
-```txt
-Build command: npm install
-Start command: npm start
-```
 
 ## Available Scripts
 
