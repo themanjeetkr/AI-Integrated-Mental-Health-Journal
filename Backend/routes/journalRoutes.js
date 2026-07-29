@@ -11,6 +11,7 @@ const {
 
 const router = express.Router();
 
+
 router.post("/", protect, createJournal);
 router.get("/", protect, getJournals);
 router.post("/suggest", protect, getJournalSuggestions);
