@@ -4,8 +4,7 @@ Frontend/node_modules/
 
 .env
 .env.*
-!Backend/.env.example
-!Frontend/.env.example
+
 
 dist/
 build/
