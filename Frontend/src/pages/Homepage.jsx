@@ -59,7 +59,7 @@ const testimonials = [
     initials: "NK",
     mood: "less overthinking",
     text:
-      "MindScribe made my thoughts feel organized without making therapy-style claims. After two weeks, I could see my Sunday anxiety pattern and finally planned around it.",
+      "WellSync made my thoughts feel organized without making therapy-style claims. After two weeks, I could see my Sunday anxiety pattern and finally planned around it.",
     detail: "32 entries written",
   },
   {
@@ -102,7 +102,7 @@ export default function Homepage() {
           <button
             onClick={() => navigate("/")}
             className="mr-auto flex items-center gap-3"
-            aria-label="MindScribe home"
+            aria-label="WellSync home"
           >
             <span className="grid h-9 w-9 place-items-center rounded-xl bg-[linear-gradient(135deg,#5dd6bd,#3d7bff)] shadow-[0_16px_40px_rgba(93,214,189,0.28)]">
               <Moon size={18} color="white" />
@@ -149,7 +149,7 @@ export default function Homepage() {
               </h1>
 
               <p className="mt-6 max-w-2xl text-lg leading-8 text-ink-300">
-                MindScribe turns private journaling into clear emotional insight, helping you
+                WellSync turns private journaling into clear emotional insight, helping you
                 notice patterns, reduce overwhelm, and build a healthier reflection habit.
               </p>
 
@@ -278,7 +278,7 @@ export default function Homepage() {
             <div className="grid gap-4 md:grid-cols-3">
               {[
                 ["Write naturally", "Capture what happened, how it felt, and what you want to remember."],
-                ["Let AI connect signals", "MindScribe summarizes emotional patterns without overwhelming you."],
+                ["Let AI connect signals", "WellSync summarizes emotional patterns without overwhelming you."],
                 ["Act with clarity", "Get one small next step that feels realistic for tomorrow."],
               ].map(([title, desc], index) => (
                 <article key={title} className="process-card">
@@ -296,7 +296,7 @@ export default function Homepage() {
             <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
               <div className="max-w-2xl">
                 <p className="eyebrow">Realistic stories</p>
-                <h2 className="section-title">People use MindScribe when life is full, not perfect.</h2>
+                <h2 className="section-title">People use WellSync when life is full, not perfect.</h2>
               </div>
               <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.05] px-4 py-2 text-sm text-ink-300">
                 <LockKeyhole size={15} />
@@ -340,7 +340,7 @@ export default function Homepage() {
                 Build the habit your future self will thank you for.
               </h2>
               <p className="mt-4 max-w-2xl text-ink-300">
-                Begin with one honest entry. MindScribe will help you turn it into clarity.
+                Begin with one honest entry. WellSync will help you turn it into clarity.
               </p>
             </div>
             <button onClick={() => navigate("/login")} className="btn-premium btn-large">
@@ -352,7 +352,7 @@ export default function Homepage() {
 
       <footer className="border-t border-white/10 px-5 py-8 md:px-8">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 text-sm text-ink-500 md:flex-row md:items-center md:justify-between">
-          <span>MindScribe. Private AI journaling for modern mental wellness.</span>
+          <span>WellSync. Private AI journaling for modern mental wellness.</span>
           <span className="flex items-center gap-2">
             <Clock3 size={14} /> Built for daily reflection
           </span>

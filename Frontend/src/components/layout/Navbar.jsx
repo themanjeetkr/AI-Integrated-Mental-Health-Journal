@@ -25,7 +25,7 @@ export default function Navbar({ title = "Dashboard" }) {
         </div>
         <div className="min-w-0">
           <p className="hidden text-[11px] font-medium uppercase text-sage-300 sm:block lg:hidden">
-            MindScribe
+            WellSync
           </p>
           <h1 className="truncate font-display text-lg font-semibold text-ink-100">{title}</h1>
         </div>

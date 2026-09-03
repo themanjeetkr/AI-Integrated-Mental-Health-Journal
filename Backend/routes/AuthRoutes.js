@@ -4,11 +4,17 @@ const protect = require("../middlewares/authMiddlewares");
 const {
   registerUser,
   login,
+  refreshToken,
+  logout,
   updateProfile,
   updatePassword,
-}=require("../controllers/authController.js")
-router.post("/register",registerUser)
-router.post("/login",login)
-router.put("/profile", protect, updateProfile)
-router.put("/password", protect, updatePassword)
+} = require("../controllers/authController.js");
+
+router.post("/register", registerUser);
+router.post("/login", login);
+router.post("/refresh", refreshToken);
+router.post("/logout", logout);
+router.put("/profile", protect, updateProfile);
+router.put("/password", protect, updatePassword);
+
 module.exports=router

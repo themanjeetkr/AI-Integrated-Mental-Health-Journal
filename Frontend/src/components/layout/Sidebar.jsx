@@ -21,7 +21,7 @@ export default function Sidebar() {
           <Moon size={16} color="white" />
         </div>
         <span className="font-display text-xl font-semibold text-ink-100">
-          Mind<span className="text-gradient-sage">Scribe</span>
+          Well<span className="text-gradient-sage">Sync</span>
         </span>
       </div>
 
